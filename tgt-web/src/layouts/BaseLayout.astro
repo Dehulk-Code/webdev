@@ -1,6 +1,9 @@
 ---
 // src/layouts/BaseLayout.astro
 import "../style/global.css"; // Import CSS global kita
+import Header from "../components/Header.astro"; //import header
+import Footer from "../components/Footer.astro"; //import footer
+
 const { pageTitle } = Astro.props;
 ---
 
@@ -12,8 +15,10 @@ const { pageTitle } = Astro.props;
         <title>{pageTitle} - PT. Tapian Godang Tua</title>
     </head>
     <body>
+        <Header />
         <main>
             <slot />
         </main>
+        <Footer />
     </body>
 </html>
