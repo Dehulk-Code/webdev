@@ -52,7 +52,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <a
-                    href="/images/sertifikat-iso-14001.jpgf"
+                    href="/images/sertifikat-iso-14001.jpg"
                     target="_blank"
                     class="sertifikat-card"
                 >
@@ -82,13 +82,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
     </section>
 
+    <section class="Nilai">
+        <div class="container" style="text-align: center;">
+            <h2>Nilai-Nilai Perusahaan</h2>
+            <p>
+                Kami menjalankan bisnis kami dengan berpegang teguh pada moto:
+            </p>
+            <h3 style="font-style: italic; color: var(--accent-color);">
+                "Diberkati Untuk Memberkati"
+            </h3>
+            <p>
+                Moto ini menjadi landasan kami dalam berinteraksi dengan klien,
+                karyawan, dan masyarakat. Kami percaya bahwa kesuksesan yang
+                kami raih adalah berkat yang harus kami bagikan melalui
+                pelayanan yang tulus, integritas, dan kualitas kerja yang
+                unggul.
+            </p>
+        </div>
+    </section>
+
     {/* Tag </BaseLayout> Anda ada di bawah sini */}
 </BaseLayout>
 
 <style>
     .about-section {
         /* 1. Mengatur tinggi section menjadi 100% tinggi layar */
-        min-height: 100vh;
+        min-height: 95vh;
 
         /* 2. Mengembalikan background-size ke 'cover' agar memenuhi layar */
         background-size: cover;
@@ -181,6 +200,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     .sertifikat-card h4 {
         margin: 10px 0 5px 0;
+        color: var(--primary-color);
+    }
+
+    .Nilai h2 {
         color: var(--primary-color);
     }
 </style>

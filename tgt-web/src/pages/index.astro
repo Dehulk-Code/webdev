@@ -6,6 +6,104 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout pageTitle="Beranda">
 	<h1>Selamat Datang di Website Baru Kita!</h1>
 	<p>Ini adalah halaman beranda yang sedang kita bangun.</p>
+	{/* ... Section "Selamat Datang" Anda di sini ... */}
+
+	<section class="services-section">
+		<div class="container">
+			<h2>Spesialisasi Kami</h2>
+			<div class="services-grid">
+				<div class="service-item">
+					<h3>Fabrication</h3>
+					<p>
+						Jasa fabrikasi komponen dan struktur baja sesuai dengan
+						desain dan kebutuhan teknis proyek Anda.
+					</p>
+				</div>
+
+				<div class="service-item">
+					<h3>Forming Head</h3>
+					<p>
+						Spesialis dalam pembuatan tutup tangki (head) untuk
+						bejana tekan dan tangki penyimpanan.
+					</p>
+				</div>
+
+				<div class="service-item">
+					<h3>Rolling Plate</h3>
+					<p>
+						Layanan pengerolan plat logam untuk membentuk silinder,
+						kerucut, atau segmen lengkung.
+					</p>
+				</div>
+
+				<div class="service-item">
+					<h3>Rolling H-Beam & WF</h3>
+					<p>
+						Jasa pengerolan balok baja profil H-Beam dan Wide Flange
+						(WF) untuk aplikasi struktur melengkung.
+					</p>
+				</div>
+
+				<div class="service-item">
+					<h3>Bending Plate</h3>
+					<p>
+						Proses penekukan plat menggunakan mesin press brake
+						untuk menghasilkan sudut dan bentuk yang presisi.
+					</p>
+				</div>
+
+				<div class="service-item">
+					<h3>Rolling Pipe</h3>
+					<p>
+						Layanan pengerolan pipa untuk menciptakan lengkungan
+						(bending) dengan radius yang diinginkan.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<style>
+		/* ... Style untuk hero-section Anda sudah ada di sini ... */
+
+		.services-section {
+			padding: 60px 0;
+			background-color: var(--light-gray);
+		}
+
+		.services-section h2 {
+			text-align: center;
+			font-size: 32px;
+			margin-bottom: 40px;
+			color: var(--primary-color);
+		}
+
+		/* KEAJAIBAN CSS GRID RESPONSIVE ADA DI SINI */
+		.services-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+		}
+
+		.service-item {
+			background: #fff;
+			padding: 25px;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			border-left: 5px solid var(--secondary-color);
+			transition: transform 0.2s ease;
+		}
+
+		.service-item:hover {
+			transform: translateY(-5px);
+		}
+
+		.service-item h3 {
+			margin-top: 0;
+			color: var(--secondary-color);
+		}
+	</style>
 
 	<!-- Tambahkan konten tinggi agar bisa di-scroll 
 	<div style="height: 2000px; background: #f4f4f4;">
