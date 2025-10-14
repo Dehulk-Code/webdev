@@ -1,0 +1,186 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout pageTitle="Tentang Kami">
+    <section class="about-section">
+        <div class="container">
+            <h2>Tentang Kami</h2>
+
+            <div class="about-text">
+                <h3>Dedikasi dalam Konstruksi dan Fabrikasi Baja</h3>
+                <p>
+                    PT. Tapian Godang Tua adalah perusahaan yang bergerak di
+                    bidang <strong
+                        >Steel Fabrication & General Contractor</strong
+                    >. Sejak awal berdiri, kami telah mendedikasikan diri untuk
+                    menjadi salah satu penyedia jasa fabrikasi baja terkemuka di
+                    Jakarta.
+                </p>
+                <h3>Visi & Misi</h3>
+                <p>
+                    <strong>Visi:</strong> Menjadi perusahaan fabrikasi baja dan
+                    kontraktor umum yang paling andal, inovatif, dan terpercaya di
+                    Indonesia.
+                </p>
+                <p>
+                    <strong>Misi:</strong> Menyediakan produk fabrikasi baja berkualitas
+                    tinggi, memberikan layanan yang responsif, dan menjalin kemitraan
+                    jangka panjang.
+                </p>
+            </div>
+        </div>
+    </section>
+    {/* ... Kode <section class="about-section"> Anda berakhir di sini ... */}
+
+    <section class="sertifikat-section">
+        <div class="container">
+            <h2>Sertifikasi Kami</h2>
+            <div class="sertifikat-grid">
+                <a
+                    href="/images/sertifikat-iso-9001.jpg"
+                    target="_blank"
+                    class="sertifikat-card"
+                >
+                    <img
+                        src="/images/sertifikat-iso-9001.jpg"
+                        alt="Sertifikat ISO 9001:2015"
+                    />
+
+                    <h4>ISO 9001:2015</h4>
+                    <p>Manajemen Mutu</p>
+                </a>
+
+                <a
+                    href="/images/sertifikat-iso-14001.jpgf"
+                    target="_blank"
+                    class="sertifikat-card"
+                >
+                    <img
+                        src="/images/sertifikat-iso-14001.jpg"
+                        alt="Sertifikat ISO 14001:2015"
+                    />
+
+                    <h4>ISO 14001:2015</h4>
+                    <p>Manajemen Lingkungan</p>
+                </a>
+
+                <a
+                    href="/images/sertifikat-iso-45001.jpg"
+                    target="_blank"
+                    class="sertifikat-card"
+                >
+                    <img
+                        src="/images/sertifikat-iso-45001.jpg"
+                        alt="Sertifikat ISO 45001:2018"
+                    />
+
+                    <h4>ISO 45001:2018</h4>
+                    <p>Kesehatan & Keselamatan Kerja</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {/* Tag </BaseLayout> Anda ada di bawah sini */}
+</BaseLayout>
+
+<style>
+    .about-section {
+        /* 1. Mengatur tinggi section menjadi 100% tinggi layar */
+        min-height: 100vh;
+
+        /* 2. Mengembalikan background-size ke 'cover' agar memenuhi layar */
+        background-size: cover;
+        background-position: center; /* Posisikan gambar di tengah */
+
+        /* 3. Gunakan Flexbox untuk menengahkan container konten */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* Properti yang sudah ada sebelumnya */
+        background-image: linear-gradient(
+                rgba(44, 62, 80, 0.85),
+                rgba(44, 62, 80, 0.85)
+            ),
+            url("/images/tim1.jpg");
+        color: white;
+    }
+
+    .container {
+        width: 85%;
+        margin: auto;
+    }
+
+    /* 3. Mengubah warna judul agar kontras */
+    .container h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: white; /* Sebelumnya var(--primary-color) */
+    }
+
+    /* 4. Menghapus style grid dan gambar yang tidak perlu */
+    .about-text {
+        max-width: 800px; /* Batasi lebar teks agar mudah dibaca */
+        margin: auto; /* Posisikan di tengah */
+        text-align: center; /* Ratakan teks di tengah */
+    }
+
+    .about-text h3 {
+        color: var(--secondary-color); /* Beri warna aksen pada sub-judul */
+    }
+
+    .sertifikat-section {
+        padding: 60px 0;
+        background-color: var(--light-gray);
+    }
+
+    .sertifikat-section h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: var(--primary-color); /* Warnanya diubah jadi gelap */
+    }
+
+    .sertifikat-grid {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .sertifikat-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--dark-gray);
+        width: 180px;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .sertifikat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .sertifikat-card img {
+        width: 100%;
+        aspect-ratio: 1 / 1.41;
+        object-fit: cover;
+        border: 1px solid #eee;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .sertifikat-card h4 {
+        margin: 10px 0 5px 0;
+        color: var(--primary-color);
+    }
+</style>

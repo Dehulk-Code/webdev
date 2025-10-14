@@ -4,7 +4,11 @@
 
 <header>
     <div class="container">
-        <a href="/" class="logo">PT. TAPIAN GODANG TUA</a>
+       <a href="/" class="logo">
+        <img src="/images/logoTGT.jpg" alt="Logo Perusahaan" class="logo-img"/>
+         <span>PT. TAPIAN GODANG TUA</span>
+      </a>
+
         <nav>
             <ul>
                 <li><a href="/">Beranda</a></li>
@@ -35,12 +39,23 @@
         margin: auto;
     }
 
-    .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: var(--primary-color);
-        text-decoration: none;
-    }
+  /* MODIFICATION START: Styling for the new logo layout */
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    
+    /* 1. Use Flexbox to align image and text */
+    display: flex;
+    align-items: center; /* Vertically center them */
+    gap: 12px; /* Add space between image and text */
+  }
+
+  .logo-img {
+    /* 2. Control the size of the logo image */
+    height: 40px; 
+  }
 
     nav ul {
         list-style: none; /* Menghilangkan titik-titik list */
