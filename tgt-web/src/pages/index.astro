@@ -4,79 +4,90 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout pageTitle="Beranda">
-	<!-- <h1>Selamat Datang di Website Baru Kita!</h1>
-	<p>Ini adalah halaman beranda yang sedang kita bangun.</p>
-	{/* ... Section "Selamat Datang" Anda di sini ... */}
--->
-	<section class="hero">
-		<h1>PT TAPIAN GODANG TUA</h1>
-		<p>Solusi Profesional untuk Fabrikasi Baja dan Kontraktor Umum</p>
-		<div>
-			<a href="/tentang" class="btn">Lihat Layanan Kami</a>
-			<a href="kontak" class="btn btn-secondary">Hubungi Kami</a>
-		</div>
-	</section>
+  <section class="hero">
+    <h1>PT TAPIAN GODANG TUA</h1>
+    <p>Solusi Profesional untuk Fabrikasi Baja dan Kontraktor Umum</p>
+    <div>
+      <a href="#layanan" class="btn">Lihat Layanan Kami</a>
+      <a href="kontak" class="btn btn-secondary">Hubungi Kami</a>
+    </div>
+  </section>
 
-	<section class="services-section">
-		<div class="container">
-			<h2>Spesialisasi Kami</h2>
-			<div class="services-grid">
-				<div class="service-item">
-					<h3>Fabrication</h3>
-					<p>
-						Jasa fabrikasi komponen dan struktur baja sesuai dengan
-						desain dan kebutuhan teknis proyek Anda.
-					</p>
-				</div>
+  <section id="layanan" class="services-section">
+    <div class="container">
+      <h2>Spesialisasi Kami</h2>
 
-				<div class="service-item">
-					<h3>Forming Head</h3>
-					<p>
-						Spesialis dalam pembuatan tutup tangki (head) untuk
-						bejana tekan dan tangki penyimpanan.
-					</p>
-				</div>
+      <p class="section-subtitle">
+        Kami menawarkan rangkaian layanan spesialis untuk memenuhi kebutuhan
+        proyek Anda dengan peralatan modern dan tim yang berpengalaman
+      </p>
 
-				<div class="service-item">
-					<h3>Rolling Plate</h3>
-					<p>
-						Layanan pengerolan plat logam untuk membentuk silinder,
-						kerucut, atau segmen lengkung.
-					</p>
-				</div>
+      <div class="services-grid">
+        <div class="service-item">
+          <h3>Fabrication</h3>
+          <p>
+            Jasa fabrikasi komponen dan struktur baja sesuai dengan desain dan
+            kebutuhan teknis proyek Anda.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Forming Head</h3>
+          <p>
+            Spesialis dalam pembuatan tutup tangki (head) dengan berbagai bentuk
+            untuk bejana tekan dan tangki penyimpanan.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Rolling Plate</h3>
+          <p>
+            Layanan pengerolan plat logam untuk membentuk silinder, kerucut,
+            atau segmen lengkung.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Rolling H-Beam & WF</h3>
+          <p>
+            Jasa pengerolan balok baja profil H-Beam dan Wide Flange (WF) untuk
+            aplikasi struktur melengkung.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Bending Plate</h3>
+          <p>
+            Proses penekukan plat (tekuk) menggunakan mesin press brake untuk
+            menghasilkan sudut dan bentuk yang presisi.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Rolling Pipe</h3>
+          <p>
+            Layanan pengerolan pipa untuk menciptakan lengkungan (bending)
+            dengan radius yang diinginkan.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Rolling Angle</h3>
+          <p>
+            Pengerolan baja siku untuk pembuatan rangka melingkar, flensa, dan
+            komponen struktural lainnya.
+          </p>
+        </div>
+        <div class="service-item">
+          <h3>Rolling UNP</h3>
+          <p>
+            Jasa pengerolan baja profil UNP (U-channel) untuk berbagai aplikasi
+            konstruksi dan struktural.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-				<div class="service-item">
-					<h3>Rolling H-Beam & WF</h3>
-					<p>
-						Jasa pengerolan balok baja profil H-Beam dan Wide Flange
-						(WF) untuk aplikasi struktur melengkung.
-					</p>
-				</div>
+  <style>
+    /* ... Style untuk hero-section Anda sudah ada di sini ... */
 
-				<div class="service-item">
-					<h3>Bending Plate</h3>
-					<p>
-						Proses penekukan plat menggunakan mesin press brake
-						untuk menghasilkan sudut dan bentuk yang presisi.
-					</p>
-				</div>
-
-				<div class="service-item">
-					<h3>Rolling Pipe</h3>
-					<p>
-						Layanan pengerolan pipa untuk menciptakan lengkungan
-						(bending) dengan radius yang diinginkan.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<style>
-		/* ... Style untuk hero-section Anda sudah ada di sini ... */
-
-		/* Hero Section (Homepage) */
-		/*
+    /* Hero Section (Homepage) */
+    /*
 		.hero {
 			background:
 				linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)),
@@ -92,91 +103,112 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			padding: 0 20px;
 		}
 	*/
-		.hero {
-			min-height: 85vh;
+    .hero {
+      min-height: 90vh;
+      color: #fff; /* Pindahkan warna teks ke sini */
 
-			background-size: cover;
-			background-position: center;
+      /* Pengaturan Flexbox untuk menengahkan konten */
+      display: flex;
+      flex-direction: column; /* Menyusun vertikal */
+      align-items: center;
+      justify-content: center;
+      text-align: center; /* Pastikan teks juga rata tengah */
 
-			display: flex;
-			align-items: center;
-			justify-content: center;
+      /* Pengaturan Background Image dengan Overlay */
+      background-size: cover;
+      background-position: center;
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        /* Lapisan gelap 50% */ url("/images/buoy.jpg"); /* Ganti dengan nama gambar Anda */
+    }
 
-			background-image: url("/images/econom.jpg");
-		}
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
 
-		.hero h1 {
-			font-size: 48px;
-			margin-bottom: 10px;
-			color: #fff;
-		}
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
 
-		.hero p {
-			font-size: 20px;
-			margin-bottom: 30px;
-		}
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--secondary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+      margin: 5px;
+    }
 
-		.btn {
-			display: inline-block;
-			padding: 12px 25px;
-			background: var(--secondary-color);
-			color: #fff;
-			text-decoration: none;
-			border-radius: 5px;
-			font-weight: bold;
-			transition: background 0.3s;
-			margin: 5px;
-		}
+    .btn:hover {
+      background: var(--accent-color);
+    }
 
-		.btn:hover {
-			background: var(--accent-color);
-		}
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #fff;
+    }
 
-		.btn-secondary {
-			background: transparent;
-			border: 2px solid #fff;
-		}
+    .container {
+      width: 85%;
+      margin: auto;
+    }
 
-		.services-section {
-			padding: 60px 0;
-			background-color: var(--light-gray);
-		}
+    .services-section {
+      padding: 60px 0;
+      min-height: 75vh;
+      background-color: var(--light-gray);
+    }
 
-		.services-section h2 {
-			text-align: center;
-			font-size: 32px;
-			margin-bottom: 40px;
-			color: var(--primary-color);
-		}
+    .services-section h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: var(--primary-color);
+    }
 
-		/* KEAJAIBAN CSS GRID RESPONSIVE ADA DI SINI */
-		.services-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 20px;
-		}
+    .section-subtitle {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      color: var(--dark-gray);
+    }
 
-		.service-item {
-			background: #fff;
-			padding: 25px;
-			border-radius: 5px;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-			text-align: center;
-			border-left: 5px solid var(--secondary-color);
-			transition: transform 0.2s ease;
-		}
+    /* KEAJAIBAN CSS GRID RESPONSIVE ADA DI SINI */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-		.service-item:hover {
-			transform: translateY(-5px);
-		}
+    .service-item {
+      background: #fff;
+      padding: 40px 25px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border-left: 5px solid var(--secondary-color);
+      transition: transform 0.2s ease;
+    }
 
-		.service-item h3 {
-			margin-top: 0;
-			color: var(--secondary-color);
-		}
-	</style>
+    .service-item:hover {
+      transform: translateY(-5px);
+    }
 
-	<!-- Tambahkan konten tinggi agar bisa di-scroll 
+    .service-item h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
+      color: var(--secondary-color);
+    }
+  </style>
+
+  <!-- Tambahkan konten tinggi agar bisa di-scroll 
 	<div style="height: 2000px; background: #f4f4f4;">
 		<p>Scroll ke bawah untuk melihat apakah header tetap di atas.</p>
 	</div> -->
