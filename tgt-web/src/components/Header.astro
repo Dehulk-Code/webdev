@@ -3,41 +3,41 @@
 ---
 
 <header>
-    <div class="container">
-       <a href="/" class="logo">
-        <img src="/images/logoTGT.jpg" alt="Logo Perusahaan" class="logo-img"/>
-         <span>PT. TAPIAN GODANG TUA</span>
-      </a>
+  <div class="container">
+    <a href="/" class="logo">
+      <img src="/images/logoTGT.jpg" alt="Logo Perusahaan" class="logo-img" />
+      <span>PT. TAPIAN GODANG TUA</span>
+    </a>
 
-        <nav>
-            <ul>
-                <li><a href="/">Beranda</a></li>
-                <li><a href="/tentang">Tentang Kami</a></li>
-                <!--  <li><a href="/layanan">Layanan</a></li> --> 
-                <li><a href="/proyek">Galeri Proyek</a></li>
-                <li><a href="/kontak">Hubungi Kami</a></li>
-            </ul>
-        </nav>
-    </div>
+    <nav>
+      <ul>
+        <li><a href="/">Beranda</a></li>
+        <li><a href="/tentang">Tentang Kami</a></li>
+        <!--  <li><a href="/layanan">Layanan</a></li> -->
+        <li><a href="/proyek">Galeri Proyek</a></li>
+        <li><a href="/kontak">Hubungi Kami</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <style>
-    header {
-        background: #fff;
-        border-bottom: 3px solid var(--secondary-color);
-        padding: 10px 0;
-        position: sticky; /* Membuat navbar tetap di atas saat di-scroll */
-        top: 0;*/
-        z-index: 1000;
-    }
+  header {
+    background: #fff;
+    border-bottom: 3px solid var(--secondary-color);
+    padding: 10px 0;
+    position: sticky; /* Membuat navbar tetap di atas saat di-scroll */
+    top: 0;
+    z-index: 1000;
+  }
 
-    .container {
-        display: flex; /* Mengaktifkan Flexbox */
-        justify-content: space-between; /* Mendorong item ke ujung (logo kiri, nav kanan) */
-        align-items: center; /* Menyelaraskan item secara vertikal di tengah */
-        width: 85%;
-        margin: auto;
-    }
+  .container {
+    display: flex; /* Mengaktifkan Flexbox */
+    justify-content: space-between; /* Mendorong item ke ujung (logo kiri, nav kanan) */
+    align-items: center; /* Menyelaraskan item secara vertikal di tengah */
+    width: 85%;
+    margin: auto;
+  }
 
   /* MODIFICATION START: Styling for the new logo layout */
   .logo {
@@ -45,7 +45,7 @@
     font-weight: bold;
     color: var(--primary-color);
     text-decoration: none;
-    
+
     /* 1. Use Flexbox to align image and text */
     display: flex;
     align-items: center; /* Vertically center them */
@@ -54,28 +54,28 @@
 
   .logo-img {
     /* 2. Control the size of the logo image */
-    height: 40px; 
+    height: 40px;
   }
 
-    nav ul {
-        list-style: none; /* Menghilangkan titik-titik list */
-        margin: 0;
-        padding: 0;
-        display: flex; /* Menggunakan Flexbox untuk menu */
-        gap: 20px; /* Memberi jarak antar menu */
-    }
+  nav ul {
+    list-style: none; /* Menghilangkan titik-titik list */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Menggunakan Flexbox untuk menu */
+    gap: 20px; /* Memberi jarak antar menu */
+  }
 
-    nav a {
-        color: var(--primary-color);
-        text-decoration: none;
-        font-weight: bold;
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
+  nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
 
-    nav a:hover {
-        color: #fff;
-        background-color: var(--accent-color);
-    }
+  nav a:hover {
+    color: #fff;
+    background-color: var(--accent-color);
+  }
 </style>

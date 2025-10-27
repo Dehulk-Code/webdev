@@ -5,11 +5,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout pageTitle="Beranda">
   <section class="hero">
-    <p>Selamat Datang di PT TAPIAN GODANG TUA</p>
-    <h1>Solusi Profesional untuk Fabrikasi Baja dan Kontraktor Umum</h1>
-    <div>
-      <a href="#layanan" class="btn">Lihat Layanan Kami</a>
-      <a href="kontak" class="btn btn-secondary">Hubungi Kami</a>
+    <div class="slider-container">
+      <div
+        class="slide active"
+        style="background-image: url('/images/buoy.jpg');"
+      >
+      </div>
+      <div class="slide" style="background-image: url('/images/econom.jpg');">
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <p>Selamat Datang di PT TAPIAN GODANG TUA</p>
+      <h1>Solusi Profesional untuk Fabrikasi Baja dan Kontraktor Umum</h1>
+      <div>
+        <a href="#layanan" class="btn">Lihat Layanan Kami</a>
+        <a href="kontak" class="btn btn-secondary">Hubungi Kami</a>
+      </div>
+    </div>
+
+    <button class="arrow left-arrow" id="prevBtn">&#10094;</button>
+    <button class="arrow right-arrow" id="nextBtn">&#10095;</button>
+
+    <div class="slider-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
     </div>
   </section>
 
@@ -84,54 +104,110 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <style>
-    /* ... Style untuk hero-section Anda sudah ada di sini ... */
-
-    /* Hero Section (Homepage) */
-    /*
-		.hero {
-			background:
-				linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)),
-				url("https://images.unsplash.com/photo-1581092921462-68390868a218?q=80&w=2070")
-					no-repeat center center/cover;
-			height: 80vh;
-			color: #fff;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-			padding: 0 20px;
-		}
-	*/
+    /* hero section */
     .hero {
       min-height: 90vh;
-      color: #fff; /* Pindahkan warna teks ke sini */
-
-      /* Pengaturan Flexbox untuk menengahkan konten */
+      position: relative;
+      overflow: hidden;
       display: flex;
-      flex-direction: column; /* Menyusun vertikal */
       align-items: center;
       justify-content: center;
-      text-align: center; /* Pastikan teks juga rata tengah */
-
-      /* Pengaturan Background Image dengan Overlay */
-      background-size: cover;
-      background-position: center;
-      background-image:
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        /* Lapisan gelap 50% */ url("/images/buoy.jpg"); /* Ganti dengan nama gambar Anda */
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-      margin-top: 20px;
       color: #fff;
     }
 
-    .hero p {
-      font-size: 20px;
-      margin: 5px;
+    /* Slider dan slide*/
+    .slider-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5 ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slider-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      background: #fff
+      font-size: 24px;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .arrow:hover {
+      background: var(--accent-color);
+    }
+    .left-arrow {
+      left: 20px;
+    }
+    .right-arrow {
+      right: 20px;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: white;
+    }
+
+    .hero-content h1 {
+      font-size: 40px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: #fff;
     }
 
     .btn {
@@ -153,6 +229,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .btn-secondary {
       background: transparent;
       border: 2px solid #fff;
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      margin: 5px;
     }
 
     .container {
@@ -208,6 +289,59 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       color: var(--secondary-color);
     }
   </style>
+
+  <script>
+    import { effect } from "astro:schema";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const dots = document.querySelectorAll(".dot");
+      const totalSlides = slides.length;
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function showSlide(index: number) {
+        if (index >= totalSlides) {
+          currentSlide = 0;
+        } else if (index < 0) {
+          currentSlide = totalSlides - 1;
+        } else {
+          currentSlide = index;
+        }
+
+        slides.forEach((slide) => slide.classList.remove("active"));
+        dots.forEach((dot) => dot.classList.remove("active"));
+
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+          showSlide(currentSlide + 1);
+        });
+      }
+      if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+          showSlide(currentSlide - 1);
+        });
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", (e) => {
+          const target = e.target as HTMLElement;
+          const slideIndex = parseInt(target.getAttribute("data-slide")!);
+
+          showSlide(slideIndex);
+        });
+      });
+
+      setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    });
+  </script>
 
   <!-- Tambahkan konten tinggi agar bisa di-scroll 
 	<div style="height: 2000px; background: #f4f4f4;">
