@@ -1,17 +1,21 @@
 ---
-// src/pages/index.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout pageTitle="Beranda">
   <section class="hero">
     <div class="slider-container">
+      <!-- Empat slide dengan gambar sama -->
       <div
         class="slide active"
         style="background-image: url('/images/buoy.jpg');"
       >
       </div>
-      <div class="slide" style="background-image: url('/images/econom.jpg');">
+      <div class="slide" style="background-image: url('/images/workshop.jpg');">
+      </div>
+      <div class="slide" style="background-image: url('/images/struktur.jpg');">
+      </div>
+      <div class="slide" style="background-image: url('/images/tim4.jpg');">
       </div>
     </div>
 
@@ -24,12 +28,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
     </div>
 
-    <button class="arrow left-arrow" id="prevBtn">&#10094;</button>
-    <button class="arrow right-arrow" id="nextBtn">&#10095;</button>
+    <!-- Tombol navigasi -->
+    <button class="arrow left-arrow" id="prevBtn" aria-label="Slide sebelumnya"
+      >&#10094;</button
+    >
+    <button class="arrow right-arrow" id="nextBtn" aria-label="Slide berikutnya"
+      >&#10095;</button
+    >
 
+    <!-- Indikator titik -->
     <div class="slider-dots">
       <span class="dot active" data-slide="0"></span>
       <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+      <span class="dot" data-slide="3"></span>
     </div>
   </section>
 
@@ -104,7 +116,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <style>
-    /* hero section */
+    /* HERO SECTION */
     .hero {
       min-height: 90vh;
       position: relative;
@@ -115,7 +127,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       color: #fff;
     }
 
-    /* Slider dan slide*/
+    /* SLIDER */
     .slider-container {
       position: absolute;
       top: 0;
@@ -134,7 +146,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 1.5 ease-in-out;
+      transition: opacity 1.5s ease-in-out;
     }
 
     .slide.active {
@@ -152,26 +164,64 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       z-index: 1;
     }
 
+    /* HERO CONTENT */
     .hero-content {
       position: relative;
       z-index: 3;
       text-align: center;
     }
 
+    .hero-content h1 {
+      font-size: 40px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      margin: 5px;
+    }
+
+    /* TOMBOL */
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--secondary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background: var(--accent-color);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #fff;
+    }
+
+    /* PANAH SLIDER */
     .arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 4;
-      background: #fff
+      background: #fff;
       font-size: 24px;
       padding: 10px 15px;
       cursor: pointer;
       border-radius: 5px;
       transition: background 0.3s;
+      color: var(--primary-color);
     }
     .arrow:hover {
       background: var(--accent-color);
+      color: #fff;
     }
     .left-arrow {
       left: 20px;
@@ -180,6 +230,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       right: 20px;
     }
 
+    /* DOTS */
     .slider-dots {
       position: absolute;
       bottom: 20px;
@@ -203,39 +254,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       background: white;
     }
 
-    .hero-content h1 {
-      font-size: 40px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: var(--secondary-color);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background 0.3s;
-      margin: 5px;
-    }
-
-    .btn:hover {
-      background: var(--accent-color);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 2px solid #fff;
-    }
-
-    .hero-content p {
-      font-size: 20px;
-      margin: 5px;
-    }
-
+    /* SECTION LAYANAN */
     .container {
       width: 85%;
       margin: auto;
@@ -261,7 +280,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       color: var(--dark-gray);
     }
 
-    /* KEAJAIBAN CSS GRID RESPONSIVE ADA DI SINI */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -290,61 +308,66 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
   </style>
 
-  <script>
-    import { effect } from "astro:schema";
-
+  <script type="module">
     document.addEventListener("DOMContentLoaded", () => {
-      let currentSlide = 0;
       const slides = document.querySelectorAll(".slide");
       const dots = document.querySelectorAll(".dot");
-      const totalSlides = slides.length;
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
 
-      function showSlide(index: number) {
-        if (index >= totalSlides) {
-          currentSlide = 0;
-        } else if (index < 0) {
-          currentSlide = totalSlides - 1;
-        } else {
-          currentSlide = index;
-        }
+      let currentSlide = 0;
+      let slideInterval = null;
 
-        slides.forEach((slide) => slide.classList.remove("active"));
-        dots.forEach((dot) => dot.classList.remove("active"));
+      function showSlide(index) {
+        const total = slides.length;
+        const normalized = ((index % total) + total) % total;
 
-        slides[currentSlide].classList.add("active");
-        dots[currentSlide].classList.add("active");
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === normalized);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === normalized);
+        });
+
+        currentSlide = normalized;
+      }
+
+      function startSlideShow() {
+        if (slideInterval !== null) clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+          showSlide(currentSlide + 1);
+        }, 5000);
+      }
+
+      function resetSlideShow() {
+        if (slideInterval !== null) clearInterval(slideInterval);
+        startSlideShow();
       }
 
       if (nextBtn) {
         nextBtn.addEventListener("click", () => {
           showSlide(currentSlide + 1);
+          resetSlideShow();
         });
       }
+
       if (prevBtn) {
         prevBtn.addEventListener("click", () => {
           showSlide(currentSlide - 1);
+          resetSlideShow();
         });
       }
 
-      dots.forEach((dot) => {
-        dot.addEventListener("click", (e) => {
-          const target = e.target as HTMLElement;
-          const slideIndex = parseInt(target.getAttribute("data-slide")!);
-
-          showSlide(slideIndex);
+      dots.forEach((dot, idx) => {
+        dot.addEventListener("click", () => {
+          showSlide(idx);
+          resetSlideShow();
         });
       });
 
-      setInterval(() => {
-        showSlide(currentSlide + 1);
-      }, 5000);
+      showSlide(currentSlide);
+      startSlideShow();
     });
   </script>
-
-  <!-- Tambahkan konten tinggi agar bisa di-scroll 
-	<div style="height: 2000px; background: #f4f4f4;">
-		<p>Scroll ke bawah untuk melihat apakah header tetap di atas.</p>
-	</div> -->
 </BaseLayout>
