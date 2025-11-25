@@ -8,8 +8,16 @@
       <img src="/images/logoTGT.jpg" alt="Logo Perusahaan" class="logo-img" />
       <span>PT. TAPIAN GODANG TUA</span>
     </a>
+    <button
+      id="menuToggle"
+      class="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
 
-    <nav>
+    <nav id="mainNav" aria-label="Primary">
       <ul>
         <li><a href="/">Beranda</a></li>
         <li><a href="/tentang">Tentang Kami</a></li>
@@ -78,4 +86,109 @@
     color: #fff;
     background-color: var(--accent-color);
   }
+
+  /* Mobile menu toggle (hidden on desktop) */
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .menu-toggle .hamburger {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--primary-color);
+    position: relative;
+  }
+  .menu-toggle .hamburger::before,
+  .menu-toggle .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 26px;
+    height: 2px;
+    background: var(--primary-color);
+  }
+  .menu-toggle .hamburger::before {
+    top: -8px;
+  }
+  .menu-toggle .hamburger::after {
+    top: 8px;
+  }
+
+  /* Mobile nav styles */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+  }
+  @media (max-width: 900px) {
+    .container {
+      width: 92%;
+    }
+    nav {
+      position: absolute;
+      top: 100%;
+      right: 12px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transform-origin: top right;
+      opacity: 0;
+      visibility: hidden;
+      transform: scaleY(0.95) translateY(-8px);
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        visibility 180ms;
+      min-width: 200px;
+    }
+    nav.open {
+      opacity: 1;
+      visibility: visible;
+      transform: scaleY(1) translateY(0);
+    }
+    nav ul {
+      display: block;
+      padding: 8px 12px;
+    }
+    nav ul li {
+      margin: 6px 0;
+    }
+    nav a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+    .menu-toggle {
+      display: block;
+    }
+    /* hide desktop horizontal menu spacing */
+    nav ul {
+      gap: 0;
+    }
+  }
 </style>
+
+<script type="module">
+  // Toggle mobile menu
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener("click", () => {
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
+      mainNav.classList.toggle("open");
+    });
+
+    // close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
+        mainNav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+</script>

@@ -27,24 +27,70 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <strong>Email:</strong><br />
             info@tapiangodangtua.com
           </p>
-          <p>
-            <strong>Jam Operasional:</strong><br />
-            Senin - Jumat, 07:30 - 17:30 WIB
-          </p>
-          <p>Sabtu, 07:30 - 12:00 WIB</p>
+          <div class="hours">
+            <div class="hours-label"><strong>Jam Operasional:</strong></div>
+            <div class="hours-list">
+              <div class="hours-row">
+                <span class="hours-day">Senin - Jumat</span>
+                <span class="hours-time">07:30 - 17:30 WIB</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Sabtu</span>
+                <span class="hours-time">07:30 - 12:00 WIB</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="contact-form">
-          <h3>Kirim Pesan Cepat</h3>
-          <form>
-            <input type="text" placeholder="Nama Lengkap Anda" required />
-            <input type="email" placeholder="Alamat Email Anda" required />
-            <input type="text" placeholder="Subjek Pesan" />
+        <div class="contact-form" id="contactFormSection">
+          <h3 id="contactFormTitle">Kirim Pesan Cepat</h3>
+          <form id="contactForm" aria-labelledby="contactFormTitle" novalidate>
+            <label for="name" class="sr-only">Nama Lengkap Anda</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Nama Lengkap Anda"
+              required
+              minlength="2"
+            />
+
+            <label for="email" class="sr-only">Alamat Email Anda</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Alamat Email Anda"
+              required
+            />
+
+            <label for="subject" class="sr-only">Subjek Pesan</label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="Subjek Pesan"
+            />
+
+            <label for="message" class="sr-only">Pesan</label>
             <textarea
+              id="message"
+              name="message"
               rows="6"
               placeholder="Tulis pesan Anda di sini..."
               required></textarea>
-            <button type="submit" class="btn">Kirim Pesan</button>
+
+            <div
+              id="formMessage"
+              class="form-message"
+              role="status"
+              aria-live="polite"
+            >
+            </div>
+
+            <button type="submit" class="btn" id="contactSubmit"
+              >Kirim Pesan</button
+            >
           </form>
         </div>
       </div>
@@ -53,6 +99,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="map-section">
     <iframe
+      title="Lokasi - Jl. Raya Cilincing No.29"
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.11330364966!2d106.8971433147686!3d-6.11535999557444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1e0b0e0b0e0b%3A0x0!2sJl.%20Raya%20Cilincing%20No.29!5e0!3m2!1sen!2sid!4v1678888888888!5m2!1sen!2sid"
       width="100%"
       height="450"
@@ -65,13 +112,51 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 </BaseLayout>
 
+<script type="module">
+  // Basic client-side handling: prevent double submit, show messages
+  const form = document.getElementById("contactForm");
+  if (form) {
+    const submitBtn = document.getElementById("contactSubmit");
+    const messageBox = document.getElementById("formMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        // show native browser messages
+        form.reportValidity();
+        return;
+      }
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute("aria-busy", "true");
+        messageBox.textContent = "Mengirim...";
+
+        // Simulate sending (replace with real fetch to API endpoint)
+        await new Promise((r) => setTimeout(r, 800));
+
+        messageBox.textContent = "Pesan berhasil dikirim. Terima kasih!";
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        messageBox.textContent = "Terjadi kesalahan. Silakan coba lagi.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute("aria-busy");
+      }
+    });
+  }
+</script>
+
 <style>
   .contact-section {
-    padding: 60px 0;
+    padding: 80px 0;
   }
   .container {
-    width: 85%;
+    width: 92%;
+    max-width: 1200px;
     margin: auto;
+    padding: 0 12px;
   }
   .contact-section h2 {
     text-align: center;
@@ -89,8 +174,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* Grid untuk layout 2 kolom */
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1.2fr 1fr; /* Lebih menonjolkan kolom konten */
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Card style for visual separation */
+  .contact-info,
+  .contact-form {
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(31, 41, 55, 0.06);
   }
 
   .contact-info p {
@@ -116,6 +211,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     font-family: inherit; /* Mewarisi font dari body */
   }
 
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: 2px solid var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+  }
+
   .contact-form .btn {
     display: inline-block;
     padding: 12px 25px;
@@ -132,6 +233,55 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     background: var(--accent-color);
   }
 
+  /* Visually-hidden helper for accessible labels */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .form-message {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  /* Hours layout: align day and time horizontally and reduce vertical gap */
+  .contact-info .hours {
+    margin-top: 8px;
+  }
+  .contact-info .hours-label {
+    margin-bottom: 6px;
+    color: var(--primary-color);
+  }
+  .contact-info .hours-list {
+    display: block;
+  }
+  .contact-info .hours-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 6px; /* smaller vertical gap */
+  }
+  .contact-info .hours-day {
+    min-width: 140px; /* reserve space for day label so times line up */
+    font-weight: normal;
+    color: var(--primary-color);
+  }
+  /* Make the strong inside .hours-label match other strong labels (e.g. Email) */
+  .contact-info .hours-label strong {
+    font-weight: 700;
+  }
+  .contact-info .hours-time {
+    color: var(--dark-gray);
+  }
+
   .map-section {
     border-top: 1px solid #eee;
   }
@@ -140,6 +290,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   @media (max-width: 768px) {
     .contact-grid {
       grid-template-columns: 1fr; /* Tumpuk kolom jadi 1 */
+    }
+    .contact-section {
+      padding: 40px 0;
+    }
+    .container {
+      padding: 0 8px;
+    }
+    .contact-info,
+    .contact-form {
+      padding: 16px;
+    }
+    .contact-form .btn {
+      width: 100%;
+    }
+    .contact-info .hours-row {
+      gap: 8px;
+      min-height: 0;
+      flex-wrap: wrap; /* allow day/time to wrap on narrow screens */
+    }
+    .contact-info .hours-day {
+      min-width: 0;
+      width: 100%;
+      margin-bottom: 4px;
     }
   }
 </style>
