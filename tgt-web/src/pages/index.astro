@@ -83,6 +83,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             aplikasi struktur melengkung.
           </p>
         </div>
+
         <div class="service-item">
           <h3>Bending Plate</h3>
           <p>
@@ -293,11 +294,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
       border-left: 5px solid var(--secondary-color);
-      transition: transform 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2 eas;
     }
 
     .service-item:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     .service-item h3 {
