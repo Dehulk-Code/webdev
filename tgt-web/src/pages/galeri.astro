@@ -1,0 +1,263 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    title: "Rolling Plate Tank",
+    location: "Dumai",
+    year: "2023",
+    description:
+      "Pengerolan plat baja untuk pembuatan tangki penyimpanan industri berdiameter besar.",
+    image: "/images/tim4.jpg",
+  },
+  {
+    title: "Struktur Baja Gudang",
+    location: "Medan",
+    year: "2022",
+    description:
+      "Fabrikasi dan pemasangan struktur baja untuk bangunan gudang industri.",
+    image: "/images/struktur.jpg",
+  },
+  {
+    title: "Workshop Fabrication",
+    location: "Bekasi",
+    year: "2024",
+    description:
+      "Proses fabrikasi berbagai komponen baja menggunakan peralatan modern.",
+    image: "/images/workshop.jpg",
+  },
+  {
+    title: "Rolling Pipe",
+    location: "Jakarta",
+    year: "2023",
+    description:
+      "Pengerolan pipa baja untuk kebutuhan struktur melengkung dan konstruksi industri.",
+    image: "/images/econom.jpg",
+  },
+  {
+    title: "Forming Head Tank",
+    location: "Batam",
+    year: "2022",
+    description:
+      "Pembuatan tutup tangki (tank head) untuk kebutuhan bejana tekan industri.",
+    image: "/images/buoy.jpg",
+  },
+  {
+    title: "Steel Structure Plant",
+    location: "Riau",
+    year: "2023",
+    description:
+      "Fabrikasi struktur baja untuk fasilitas industri dan plant produksi.",
+    image: "/images/tim1.jpg",
+  },
+  {
+    title: "Rolling Angle Ring",
+    location: "Karawang",
+    year: "2023",
+    description:
+      "Pengerolan baja siku untuk pembuatan ring struktur dan flange industri.",
+    image: "/images/tim2.jpg",
+  },
+  {
+    title: "Tank Fabrication",
+    location: "Cilegon",
+    year: "2022",
+    description:
+      "Fabrikasi tangki baja untuk kebutuhan penyimpanan cairan industri.",
+    image: "/images/tim3.jpg",
+  },
+  {
+    title: "Bending Plate Structure",
+    location: "Surabaya",
+    year: "2024",
+    description:
+      "Proses bending plate menggunakan mesin press brake untuk komponen struktur.",
+    image: "/images/struktur.jpg",
+  },
+];
+---
+
+<BaseLayout pageTitle="Galeri Proyek">
+  <section class="gallery">
+    <div class="container">
+      <h1>Galeri Proyek</h1>
+
+      <p class="subtitle">
+        Beberapa proyek fabrikasi baja dan konstruksi yang telah kami kerjakan.
+      </p>
+
+      <div class="project-grid">
+        {
+          projects.map((project) => (
+            <div class="project-card" data-image={project.image}>
+              <img src={project.image} alt={project.title} />
+
+              <div class="project-info">
+                <h3>{project.title}</h3>
+
+                <p class="project-meta">
+                  {project.location} • {project.year}
+                </p>
+
+                <p class="project-desc">{project.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg" />
+  </div>
+</BaseLayout>
+
+<style>
+  .gallery {
+    padding: 80px 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 50px;
+  }
+
+  .gallery h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #666;
+  }
+
+  /* GRID */
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+  }
+
+  /* CARD */
+
+  .project-card {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .project-info {
+    padding: 20px;
+  }
+
+  .project-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+  }
+
+  .project-meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  /* MODAL */
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .modal-content {
+    display: block;
+    margin: auto;
+    max-width: 90%;
+    max-height: 80vh;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+  }
+
+  /* RESPONSIVE */
+
+  @media (max-width: 1000px) {
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll(".project-card");
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeBtn = document.querySelector(".close");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      if (modal && modalImg) {
+        modal.style.display = "block";
+        const modalImg = document.getElementById(
+          "modalImg",
+        ) as HTMLImageElement;
+      }
+    });
+  });
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+</script>
