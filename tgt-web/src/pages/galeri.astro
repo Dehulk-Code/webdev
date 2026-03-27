@@ -3,15 +3,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const projects = [
   {
-    title: "Rolling Plate Tank",
+    title: "Light Buoy",
     location: "Dumai",
     year: "2023",
     description:
-      "Pengerolan plat baja untuk pembuatan tangki penyimpanan industri berdiameter besar.",
-    image: "/images/tim4.jpg",
+      "Pelampung navigasi berlampu yang digunakan untuk menandai jalur, batas, atau bahaya di perairan.",
+    image: "/images/buoy1.jpg",
   },
   {
-    title: "Struktur Baja Gudang",
+    title: "Struktur",
     location: "Medan",
     year: "2022",
     description:
@@ -19,28 +19,28 @@ const projects = [
     image: "/images/struktur.jpg",
   },
   {
-    title: "Workshop Fabrication",
+    title: "Economizer",
     location: "Bekasi",
     year: "2024",
     description:
-      "Proses fabrikasi berbagai komponen baja menggunakan peralatan modern.",
-    image: "/images/workshop.jpg",
-  },
-  {
-    title: "Rolling Pipe",
-    location: "Jakarta",
-    year: "2023",
-    description:
-      "Pengerolan pipa baja untuk kebutuhan struktur melengkung dan konstruksi industri.",
+      "Komponen boiler untuk memanfaatkan panas gas buang agar lebih hemat energi.",
     image: "/images/econom.jpg",
   },
   {
-    title: "Forming Head Tank",
+    title: "Pressure Vessel",
+    location: "Jakarta",
+    year: "2023",
+    description:
+      "Tangki bertekanan yang digunakan dalam sistem pengolahan air.",
+    image: "/images/tim1.jpg",
+  },
+  {
+    title: "Chimney",
     location: "Batam",
     year: "2022",
     description:
-      "Pembuatan tutup tangki (tank head) untuk kebutuhan bejana tekan industri.",
-    image: "/images/buoy.jpg",
+      "Cerobong yang berfungsi membuang gas atau asap dari sistem boiler ke udara.",
+    image: "/images/chimney.jpg",
   },
   {
     title: "Steel Structure Plant",
@@ -95,9 +95,11 @@ const projects = [
               <div class="project-info">
                 <h3>{project.title}</h3>
 
+                <!-- 
                 <p class="project-meta">
                   {project.location} • {project.year}
                 </p>
+                -->
 
                 <p class="project-desc">{project.description}</p>
               </div>
@@ -117,7 +119,7 @@ const projects = [
 
 <style>
   .gallery {
-    padding: 80px 0;
+    padding: 30px 0;
   }
 
   .container {
@@ -235,19 +237,17 @@ const projects = [
 <script>
   const cards = document.querySelectorAll(".project-card");
   const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("modalImg");
+  const modalImg = document.getElementById("modalImg") as HTMLImageElement;
   const closeBtn = document.querySelector(".close");
 
   cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      if (modal && modalImg) {
-        modal.style.display = "block";
-        const modalImg = document.getElementById(
-          "modalImg",
-        ) as HTMLImageElement;
-      }
-    });
+  card.addEventListener("click", () => {
+    if (modal && modalImg) {
+      modal.style.display = "block";
+      modalImg.src = card.getAttribute("data-image") || ""; // ambil gambar dari data-image
+    }
   });
+});
 
   if (closeBtn && modal) {
     closeBtn.addEventListener("click", () => {
