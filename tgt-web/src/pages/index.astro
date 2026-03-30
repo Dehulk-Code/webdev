@@ -368,6 +368,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       color: var(--secondary-color);
       margin-bottom: 10px;
     }
+    /* Sembunyikan panah navigasi hanya pada layar di bawah 768px (HP/Tablet kecil) */
+    /* Menghilangkan panah navigasi di layar HP/Tablet kecil */
+    @media (max-width: 768px) {
+      .arrow {
+        display: none !important;
+      }
+    }
   </style>
 
   <script type="module">
