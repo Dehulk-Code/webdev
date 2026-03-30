@@ -44,7 +44,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         <div class="contact-form" id="contactFormSection">
           <h3 id="contactFormTitle">Kirim Pesan Cepat</h3>
-          <form id="contactForm" aria-labelledby="contactFormTitle" novalidate>
+
+          <form
+            id="contactForm"
+            action="https://formspree.io/f/mnjopewl"
+            method="POST"
+            aria-labelledby="contactFormTitle"
+          >
             <label for="name" class="sr-only">Nama Lengkap Anda</label>
             <input
               id="name"
@@ -52,7 +58,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               type="text"
               placeholder="Nama Lengkap Anda"
               required
-              minlength="2"
             />
 
             <label for="email" class="sr-only">Alamat Email Anda</label>
@@ -115,31 +120,55 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <script type="module">
   // Basic client-side handling: prevent double submit, show messages
   const form = document.getElementById("contactForm");
-  if (form) {
-    const submitBtn = document.getElementById("contactSubmit");
-    const messageBox = document.getElementById("formMessage");
+  const submitBtn = document.getElementById("contactSubmit");
+  const messageBox = document.getElementById("formMessage");
 
+  if (form) {
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Mencegah reload halaman
+
       if (!form.checkValidity()) {
-        // show native browser messages
         form.reportValidity();
         return;
       }
 
+      const formData = new FormData(form);
+
       try {
         submitBtn.disabled = true;
         submitBtn.setAttribute("aria-busy", "true");
-        messageBox.textContent = "Mengirim...";
+        messageBox.style.color = "var(--primary-color)";
+        messageBox.textContent = "Sedang mengirim pesan...";
 
-        // Simulate sending (replace with real fetch to API endpoint)
-        await new Promise((r) => setTimeout(r, 800));
+        // Mengirim data ke Formspree menggunakan Fetch API
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
 
-        messageBox.textContent = "Pesan berhasil dikirim. Terima kasih!";
-        form.reset();
+        if (response.ok) {
+          messageBox.style.color = "green";
+          messageBox.textContent =
+            "Pesan berhasil dikirim ke PT Tapian Godang Tua. Terima kasih!";
+          form.reset();
+        } else {
+          const data = await response.json();
+          if (data.errors) {
+            messageBox.style.color = "red";
+            messageBox.textContent = data.errors
+              .map((error) => error.message)
+              .join(", ");
+          } else {
+            throw new Error();
+          }
+        }
       } catch (err) {
-        console.error(err);
-        messageBox.textContent = "Terjadi kesalahan. Silakan coba lagi.";
+        messageBox.style.color = "red";
+        messageBox.textContent =
+          "Terjadi kesalahan teknis. Silakan coba lagi nanti.";
       } finally {
         submitBtn.disabled = false;
         submitBtn.removeAttribute("aria-busy");
