@@ -9,16 +9,22 @@ const { pageTitle } = Astro.props;
 
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{pageTitle} - PT. Tapian Godang Tua</title>
-    </head>
-    <body>
-        <Header />
-        <main>
-            <slot />
-        </main>
-        <Footer />
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/logoTGT.jpg"
+    />
+    <title>{pageTitle} - PT. Tapian Godang Tua</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

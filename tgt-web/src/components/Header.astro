@@ -6,7 +6,11 @@
   <div class="container">
     <a href="/" class="logo">
       <img src="/images/logoTGT.jpg" alt="Logo Perusahaan" class="logo-img" />
-      <span>PT. TAPIAN GODANG TUA</span>
+      <div class="logo-text">
+        <span class="nama-perusahaan">PT. TAPIAN GODANG TUA</span>
+        <span class="tagline-perusahaan">STEEL FABRICATION & SITE ERECTION</span
+        >
+      </div>
     </a>
     <button
       id="menuToggle"
@@ -49,20 +53,45 @@
 
   /* MODIFICATION START: Styling for the new logo layout */
   .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-
     /* 1. Use Flexbox to align image and text */
     display: flex;
     align-items: center; /* Vertically center them */
     gap: 12px; /* Add space between image and text */
+    text-decoration: none;
   }
 
   .logo-img {
     /* 2. Control the size of the logo image */
     height: 40px;
+  }
+
+  .logo-text {
+    /* 3. Stack the company name and tagline vertically */
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1; /* Reduce line height for tighter spacing */
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .logo-text span {
+    text-decoration: none;
+  }
+
+  .nama-perusahaan {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
+  .tagline-perusahaan {
+    font-size: 13px; /* lebih kecil */
+    color: #e60000; /* merah terang */
+    font-weight: 600;
+    display: block;
+    line-height: 1; /* rapatkan agar nggak terlalu jauh */
   }
 
   nav ul {
